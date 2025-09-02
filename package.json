@@ -6,7 +6,7 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint",
+    "lint": "eslint .",
     "prettier": "npx prettier 'src/**/*.{js,ts,tsx,mjs,cjs,json}' --write",
     "postbuild": "next-sitemap"
   },

@@ -28,6 +28,7 @@
     "@types/react-dom": "19.2.3",
     "@typescript-eslint/eslint-plugin": "8.50.1",
     "@typescript-eslint/parser": "8.50.1",
+    "dotenv": "^17.2.3",
     "eslint": "9.39.2",
     "eslint-config-next": "16.1.1",
     "npm-check-updates": "19.2.0",

@@ -7,7 +7,7 @@ Nutzer können Prompts in einer übersichtlichen UI durchsuchen, kategorisieren 
 - Übersichtliche Anzeige von Prompts mit Kategorien
 - Direkte Verlinkung zu einem GPT für einfaches Testen
 - Kopierfunktion, um Prompts schnell in die Zwischenablage zu speichern
-- Einfache JSON-Verwaltung für gespeicherte Prompts (MVP)
+- PostgreSQL-Datenbank zur Verwaltung der Prompts
 
 ## 📦 Installation
 1. Projekt klonen
@@ -21,16 +21,21 @@ Nutzer können Prompts in einer übersichtlichen UI durchsuchen, kategorisieren 
     npm install
     ```
 
-3.	Entwicklungsserver starten
+3.  Umgebungsvariablen einrichten
+    Erstelle eine `.env.local` Datei im Hauptverzeichnis des Projekts und füge die Verbindungszeichenfolge für deine PostgreSQL-Datenbank hinzu. Eine `.env.example`-Datei ist als Vorlage vorhanden.
+    ```bash
+    cp .env.example .env.local
+    ```
+    Bearbeite die `.env.local`-Datei mit deinen Datenbankdaten.
+
+4.  Datenbankmigration
+    Führe das Migrationsskript aus, um die `prompts`-Tabelle in deiner Datenbank zu erstellen und die anfänglichen Daten zu laden.
+    ```bash
+    npm run migrate
+    ```
+
+5.	Entwicklungsserver starten
     ```bash
     npm run dev
     ```
     Danach ist die App unter http://localhost:3000 erreichbar.
-
-## 🌟 Roadmap
-
-✅ MVP mit statischer JSON-Datei
-
-🔜 Filter-/Suchfunktion für Prompts
-
-🔜 Backend zur dynamischen Verwaltung der Prompts

@@ -2,7 +2,14 @@ const { Pool } = require('pg');
 const fs = require('fs');
 const path = require('path');
 
+// Conditionally load dotenv for local development
+if (!process.env.POSTGRES_URL) {
+  require('dotenv').config({ path: path.resolve(__dirname, '../.env.local') });
+}
 
+if (!process.env.POSTGRES_URL) {
+  throw new Error('POSTGRES_URL is not defined. Please ensure it is set in your environment or in a .env.local file.');
+}
 
 const pool = new Pool({
   connectionString: process.env.POSTGRES_URL,

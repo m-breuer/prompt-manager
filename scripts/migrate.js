@@ -18,7 +18,7 @@ const migrate = async () => {
       CREATE TABLE IF NOT EXISTS prompts (
         id SERIAL PRIMARY KEY,
         category VARCHAR(255) NOT NULL,
-        title VARCHAR(255) NOT NULL,
+        title VARCHAR(255) NOT NULL UNIQUE,
         description TEXT,
         gpt_link VARCHAR(255),
         prompt TEXT NOT NULL
@@ -30,7 +30,14 @@ const migrate = async () => {
 
     for (const prompt of data) {
       await client.query(
-        `INSERT INTO prompts (category, title, description, gpt_link, prompt) VALUES ($1, $2, $3, $4, $5)`,
+        `INSERT INTO prompts (category, title, description, gpt_link, prompt) 
+         VALUES ($1, $2, $3, $4, $5)
+         ON CONFLICT (title) 
+         DO UPDATE SET 
+           category = EXCLUDED.category,
+           description = EXCLUDED.description,
+           gpt_link = EXCLUDED.gpt_link,
+           prompt = EXCLUDED.prompt;`,
         [prompt.category, prompt.title, prompt.description, prompt.gpt_link, prompt.prompt]
       );
     }
